@@ -15,5 +15,9 @@ class ProjectItem extends Component {
     );
   }
 }
-
+//adding validation for the properties
+ProjectItem.propTypes={
+  projectItem:React.PropTypes.object,
+  onDelete:React.PropTypes.func
+}
 export default ProjectItem;
