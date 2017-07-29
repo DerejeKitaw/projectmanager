@@ -29,10 +29,14 @@ class App extends Component {
       }
     )
   }
+handleProject(project){
+  console.log(project);
+}
+
   render() {
     return (
       <div className="App">
-        <AddProject />
+        <AddProject addProject={this.handleProject.bind(this)}/>
         <Projects projects={this.state.projects} />
       </div>
     );
