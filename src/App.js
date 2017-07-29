@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import uuid from 'uuid';
+import $ from 'jquery';
 import './App.css';
 import Projects from './component/Projects'
 import AddProject from './component/AddProject'
@@ -10,10 +11,25 @@ class App extends Component {
       projects: []
     }
   }
-  componentWillMount() {
-    this.setState(
-      {
-        projects: [
+
+  getTodos(){
+    // call http request here
+    $.ajax({
+      url:'https://jsonplaceholder.typicode.com/todos',
+      dataType:'json',
+      cache: false,
+      success: function(data){
+        this.setState({todos: data}, function(){
+          console.log(this.state);
+        });
+      }.bind(this),
+      error: function(xhr, status, err){
+        console.log(err);
+      }
+    })
+  }
+  getProjects(){
+    this.setState({        projects: [
           {
           id:uuid.v4(),
           title: 'Business Website',
@@ -29,11 +45,19 @@ class App extends Component {
           title: 'Ecommerce Shoping Cart',
           category: 'Web Development'
         }
-        ]
-      }
-    )
+        ]})
   }
-handleProject(project){
+
+  componentWillMount() {
+    this.getProjects();
+    this.getTodos();
+  }
+
+componentDidMount(){
+
+}
+
+handleAddProject(project){
   // console.log(project);
   //Add value to the state
   let projects = this.state.projects;
@@ -42,14 +66,14 @@ handleProject(project){
 }
 handleDeleteProject(id){
   let projects = this.state.projects;
-  let index = projects.findIndex(x => x.id ==id);
+  let index = projects.findIndex(x => x.id ===id);
   projects.splice(index, 1);
   this.setState({projects:projects});
 }
   render() {
     return (
       <div className="App">
-        <AddProject addProject={this.handleProject.bind(this)}/>
+        <AddProject addProject={this.handleAddProject.bind(this)}/>
         <Projects projects={this.state.projects} onDelete={this.handleDeleteProject.bind(this)} />
       </div>
     );
