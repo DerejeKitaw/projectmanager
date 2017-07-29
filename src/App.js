@@ -30,7 +30,11 @@ class App extends Component {
     )
   }
 handleProject(project){
-  console.log(project);
+  // console.log(project);
+  //Add value to the state
+  let projects = this.state.projects;
+  projects.push(project);
+  this.setState({projects:projects})
 }
 
   render() {
