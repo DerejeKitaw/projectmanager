@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import uuid from 'uuid';
 import './App.css';
 import Projects from './component/Projects'
 import AddProject from './component/AddProject'
@@ -14,14 +15,17 @@ class App extends Component {
       {
         projects: [
           {
+          id:uuid.v4(),
           title: 'Business Website',
           category: 'Web Design'
         },
         {
+          id:uuid.v4(),
           title: 'Social App',
           category: 'Mobile Development'
         },
         {
+          id:uuid.v4(),
           title: 'Ecommerce Shoping Cart',
           category: 'Web Development'
         }
