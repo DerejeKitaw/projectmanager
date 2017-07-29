@@ -7,6 +7,10 @@ class AddProject extends Component {
             'web Design' , 'Web Development', 'Mobile Development'
         ]
     }
+    handleSubmit(e){
+        console.log("Submitted");
+        e.preventDefault(); //do not work with out this
+    }
   render() {
       let categoryOptions = this.props.categories.map(category =>{
           return <option key={category} value="category">{category}</option>
@@ -14,7 +18,7 @@ class AddProject extends Component {
     return (
       <div>
           <h3>Add Project</h3>
-          <form action="">
+          <form onSubmit={this.handleSubmit}>
               <div>
                   <lable>Title</lable>
                   <input type="text" ref="title"/>
@@ -25,6 +29,7 @@ class AddProject extends Component {
                     {categoryOptions}
                   </select>
               </div>
+              <input type="submit" value="Submit"/>
           </form>
       </div>
     );
